@@ -17,12 +17,20 @@ Note: Development is currently balanced alongside full-time studies, so updates 
 
 ## System Requirements & Prerequisites
 
+To ensure Ghost can properly spoof your hardware, translate binaries, and compile fake NVIDIA DLLs, you must install the following tools:
+
 **Windows:**
 * **OS:** Windows 10 or Windows 11.
 * **Drivers:** Latest Intel Arc & Iris Xe Graphics Drivers (Wildcat Lake supported).
-* **Intel oneAPI Base Toolkit:** *Crucial* for the `ghost-translate` tool and SYCL runtime libraries.
-* **Visual Studio Build Tools:** Required for the `cl.exe` C++ compiler. Ghost uses this to JIT-compile fake NVIDIA DLLs and to run syntax checks on translated SYCL code.
 * **PowerShell:** Version 5.1 or newer (Built into Windows).
+
+**Required Developer Tools:**
+* **Intel oneAPI Base Toolkit:** *Crucial* for the `ghost-translate` tool and SYCL runtime libraries.
+  * **Where to get it:** [Download from Intel's Official Site](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit-download.html) (Select Windows -> Local Installer).
+  * **Where to install it:** Leave the installation path as the default (`C:\Program Files (x86)\Intel\oneAPI\` or `C:\Intel\oneAPI\`). Ghost is hardcoded to automatically scan these specific directories.
+* **Visual Studio Build Tools:** Required for the `cl.exe` C++ compiler. Ghost uses this to JIT-compile fake NVIDIA DLLs and to run syntax checks on translated SYCL code.
+  * **Where to get it:** [Download from Microsoft](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+  * **Where to install it:** Run the installer and ensure you check the box for **"Desktop development with C++"**. You can leave the installation path as the default. Ghost will automatically find it via your system PATH.
 
 ## Hardware Support Matrix
 The internal detection engine provides dynamic spoofing and optimization logic across multiple generations of Intel architectures:
@@ -143,6 +151,11 @@ You can translate CUDA code to SYCL using `ghost-translate`, but to actually com
 
 **VRAM/Temp stuck on "Loading..."**
 Ensure your Intel Arc/Iris display drivers are up to date. Ghost relies on WMI and `dxdiag` to poll hardware stats. If you have a multi-GPU setup, Ghost will automatically sum the VRAM of your Intel cards.
+
+**DOOM looks like a jumbled mess of letters!**
+If DOOM looks stretched or unreadable:
+1. Change Terminal Size to 80x120
+2. Press CTRL + - (Minus) 5 or 6 times to zoom out. Smaller fonts = Higher Resolution ASCII graphics!
 
 **The Music won't play / No Audio**
 Ghost uses the native `WMPlayer.OCX` COM object. Ensure Windows Media Player is not completely uninstalled from your Windows Optional Features.
